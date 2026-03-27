@@ -5,24 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Girişi | T.C. Adalet Bakanlığı</title>
     <style>
-        body { font-family: 'Open Sans', Arial, sans-serif; margin: 0; background: #f0f2f5; display: flex; align-items: center; justify-content: center; height: 100vh; }
-        #login-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border-top: 6px solid #e30613; }
+        /* GİRİŞ EKRANI (RESMİ GÖRÜNÜM) */
+        body { font-family: 'Open Sans', Arial, sans-serif; margin: 0; background: #f0f2f5; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        #login-box { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border-top: 6px solid #e30613; position: relative; z-index: 10; }
         .logo { height: 80px; margin-bottom: 20px; }
         h2 { font-size: 16px; color: #1b2631; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; font-weight: 700; }
         input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; outline: none; }
         .btn-entry { background: #e30613; color: #fff; border: none; padding: 14px; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
         .btn-entry:hover { background: #b0050f; }
         
-        #main-content { display: none; background: #fff; width: 100%; height: 100vh; overflow-y: auto; position: absolute; top:0; left:0; }
-        .header { background: #fff; padding: 15px 10%; border-bottom: 3px solid #e30613; display: flex; align-items: center; justify-content: space-between; }
+        /* ANA PANEL (MANUS TARZI - HACKER THEME) */
+        #main-content { display: none; background: #010101; width: 100%; height: 100vh; overflow-y: auto; position: absolute; top:0; left:0; color: #00ff00; font-family: 'Courier New', Courier, monospace; }
+        .header { background: #000; padding: 10px 5%; border-bottom: 2px solid #00ff00; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 15px rgba(0,255,0,0.3); }
+        .logo-area { display: flex; align-items: center; gap: 10px; filter: grayscale(100%) brightness(200%); } /* Logoyu siber havaya soktuk */
+        
         .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-        .master-panel { background: #1b2631; border-radius: 12px; padding: 35px; color: #fff; margin-top: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .sorgu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        .sorgu-item { background: #2c3e50; padding: 20px; border-radius: 8px; border: 1px solid #34495e; }
-        .s-title { font-weight: 800; font-size: 13px; color: #3b82f6; margin-bottom: 10px; }
-        input.dark { background: #1b2631; color: #fff; border: 1px solid #444; margin-top: 5px; }
-        .btn-exe { background: #e30613; color: #fff; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 12px; width: 100%; }
-        .footer { background: #1b2631; color: #fff; padding: 30px; text-align: center; font-size: 11px; margin-top: 50px; }
+        h1 { font-size: 22px; color: #00ff00; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,255,0,0.5); }
+        
+        .console-box { background: rgba(0,255,0,0.05); border: 1px solid #00ff00; padding: 20px; border-radius: 5px; margin-bottom: 30px; box-shadow: inset 0 0 20px rgba(0,255,0,0.1); }
+        .console-text { font-size: 13px; line-height: 1.6; color: #00ff00; }
+        
+        .sorgu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .sorgu-item { background: #0a0a0a; padding: 20px; border-radius: 5px; border: 1px solid #333; transition: 0.3s; position: relative; overflow: hidden; }
+        .sorgu-item:hover { border-color: #00ff00; box-shadow: 0 0 15px rgba(0,255,0,0.2); }
+        .sorgu-item::after { content: 'MANUS'; position: absolute; top: -10px; right: -10px; font-size: 40px; color: rgba(0,255,0,0.03); font-weight: 900; }
+        
+        .s-title { font-weight: 800; font-size: 12px; color: #00ff00; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        input.dark { background: #000; color: #00ff00; border: 1px solid #00ff00; margin-top: 5px; font-family: 'Courier New', monospace; outline: none; }
+        input.dark::placeholder { color: rgba(0,255,0,0.3); }
+        
+        .btn-exe { background: transparent; color: #00ff00; border: 1px solid #00ff00; padding: 10px; border-radius: 3px; font-weight: bold; cursor: pointer; margin-top: 12px; width: 100%; font-family: 'Courier New', monospace; text-transform: uppercase; transition: 0.3s; }
+        .btn-exe:hover { background: #00ff00; color: #000; box-shadow: 0 0 10px rgba(0,255,0,0.5); }
+        
+        .footer { background: #000; padding: 20px; text-align: center; font-size: 10px; color: rgba(0,255,0,0.5); margin-top: 50px; border-top: 1px solid #333; }
     </style>
 </head>
 <body>
@@ -33,62 +48,74 @@
     <input type="text" id="user" placeholder="Kullanıcı Kimliği">
     <input type="password" id="pass" placeholder="Güvenlik Anahtarı">
     <button class="btn-entry" onclick="validate()">OTURUM AÇ</button>
-    <p id="err" style="color:red; font-size:12px; margin-top:15px; display:none;">⚠️ Geçersiz Kullanıcı veya Şifre!</p>
+    <p id="err" style="color:red; font-size:12px; margin-top:15px; display:none;">⚠️ Kimlik Doğrulama Başarısız!</p>
 </div>
 
 <div id="main-content">
     <div class="header">
-        <div style="display:flex; align-items:center; gap:12px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/T.C._Adalet_Bakanl%C4%B1%C4%9F%C4%B1_Logo.png/600px-T.C._Adalet_Bakanl%C4%B1%C4%9F%C4%B1_Logo.png" height="45">
-            <div style="font-size:12px; font-weight:bold;">TÜRKİYE CUMHURİYETİ<br>ADALET BAKANLIĞI</div>
+        <div class="logo-area">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/T.C._Adalet_Bakanl%C4%B1%C4%9F%C4%B1_Logo.png/600px-T.C._Adalet_Bakanl%C4%B1%C4%9F%C4%B1_Logo.png" height="35">
+            <div style="font-size:10px; font-weight:bold; color:#00ff00;">T.C. ADALET BAKANLIĞI<br>SİBER VERİ ERİŞİMİ</div>
         </div>
-        <div style="font-size:11px; color:#22c55e;">● ERİŞİM YETKİSİ: TAM (ROOT)</div>
+        <div style="font-size:10px; color:#00ff00; font-weight:bold; text-shadow: 0 0 5px #00ff00;">● STATUS: ROOT_ACCESS_GRANTED</div>
     </div>
     <div class="container">
-        <h1 style="color:#1b2631; font-size:26px; border-bottom:2px solid #e30613; padding-bottom:10px;">Adli Sicil & Global Veri Sorgulama</h1>
-        <div style="background:#f9f9f9; padding:20px; border-left:5px solid #e30613; margin:25px 0; font-size:14px;">
-            <b>Hoş Geldiniz, Doğan Uçar.</b><br>
-            Sistem operatörü: <b>Mustafa Kemal paşa</b> (Yetki Seviyesi: Üst Düzey)
+        <h1>GLOBAL SORGU MERKEZİ [MANUS RATED]</h1>
+        
+        <div class="console-box">
+            <div class="console-text">
+                > Bağlantı kuruldu: Adalet Bakanlığı Veri Ağları...<br>
+                > Operatör Kimliği: Mustafa Kemal paşa (YETKİ: TAM)<br>
+                > Sistem Modülü: Global Sorgu v4.8 [BETA]<br>
+                > Dikkat: Tüm işlemler loglanmaktadır. Yetkisiz veri paylaşımı suçtur.
+            </div>
         </div>
 
-        <div class="master-panel">
-            <div style="margin-bottom:25px; font-weight:900; color:#3b82f6;">GLOBAL SORGU DİREKTÖRLÜĞÜ v4.5</div>
-            <div class="sorgu-grid">
-                <div class="sorgu-item">
-                    <div class="s-title">👤 TC / MERNİS SORGULAMA</div>
-                    <input type="text" class="dark" placeholder="TC No...">
-                    <button class="btn-exe" onclick="alert('Mernis datası çekiliyor...')">SORGULA</button>
-                </div>
-                <div class="sorgu-item">
-                    <div class="s-title">🏨 OTEL / KONAKLAMA KAYDI</div>
-                    <input type="text" class="dark" placeholder="TC veya İsim...">
-                    <button class="btn-exe" onclick="alert('KBS kayıtları taranıyor...')">SORGULA</button>
-                </div>
-                <div class="sorgu-item">
-                    <div class="s-title">🚗 PLAKA / ARAÇ SORGULAMA</div>
-                    <input type="text" class="dark" placeholder="Plaka girin...">
-                    <button class="btn-exe" onclick="alert('EGM Araç verisi dökülüyor...')">SORGULA</button>
-                </div>
-                <div class="sorgu-item">
-                    <div class="s-title">🚔 GBT / ADLİ SİCİL</div>
-                    <input type="text" class="dark" placeholder="TC No...">
-                    <button class="btn-exe" onclick="alert('Adli Sicil dökümü hazırlanıyor...')">SORGULA</button>
-                </div>
+        <div class="sorgu-grid">
+            <div class="sorgu-item">
+                <div class="s-title">[01] TC / MERNİS SORGU</div>
+                <input type="text" class="dark" placeholder="TC No girin...">
+                <button class="btn-exe" onclick="alert('Veritabanı taranıyor... Sonuçlar hazırlanıyor.')">EXECUTE_QUERY</button>
+            </div>
+            <div class="sorgu-item">
+                <div class="s-title">[02] OTEL / KONAKLAMA SORGULAMA</div>
+                <input type="text" class="dark" placeholder="TC veya İsim...">
+                <button class="btn-exe" onclick="alert('KBS kayıtları dökülüyor... [MANUS MOD]')">EXECUTE_QUERY</button>
+            </div>
+            <div class="sorgu-item">
+                <div class="s-title">[03] PLAKA / ARAÇ SORGULAMA</div>
+                <input type="text" class="dark" placeholder="Plaka girin...">
+                <button class="btn-exe" onclick="alert('EGM Araç verisi taranıyor...')">EXECUTE_QUERY</button>
+            </div>
+            <div class="sorgu-item">
+                <div class="s-title">[04] GBT / ADLİ SİCİL TARAMA</div>
+                <input type="text" class="dark" placeholder="Kimlik No...">
+                <button class="btn-exe" onclick="alert('Polnet ve Uyap dökümü hazırlanıyor...')">EXECUTE_QUERY</button>
+            </div>
+            <div class="sorgu-item">
+                <div class="s-title">[05] GSM / NUMARA SORGULAMA</div>
+                <input type="text" class="dark" placeholder="5xx xxx xx xx">
+                <button class="btn-exe" onclick="alert('Operatör API bağlantısı kuruldu...')">EXECUTE_QUERY</button>
+            </div>
+            <div class="sorgu-item">
+                <div class="s-title">[06] ADRES / İKAMETGAH SORGULAMA</div>
+                <input type="text" class="dark" placeholder="Kimlik No...">
+                <button class="btn-exe" onclick="alert('Adres kayıtları taranıyor...')">EXECUTE_QUERY</button>
             </div>
         </div>
     </div>
-    <div class="footer">© 2026 Adalet Bakanlığı - Tüm Hakları Saklıdır.</div>
+    <div class="footer">© 2026 Adalet Bakanlığı - Global Siber Direktörlüğü | MANUS LITE v1.6.2</div>
 </div>
 
 <script>
     function validate() {
         var u = document.getElementById('user').value;
         var p = document.getElementById('pass').value;
-        // KULLANICI ADI VE ŞİFRE KONTROLÜ
+        // GİRİŞ KONTROLÜ
         if(u === "Mustafa Kemal paşa" && p === "2111494") {
             document.getElementById('login-box').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            document.body.style.background = "#fff";
+            document.body.style.background = "#010101"; // Arka planı siyaha çevir
         } else {
             document.getElementById('err').style.display = 'block';
         }
@@ -96,4 +123,4 @@
 </script>
 
 </body>
-</html>
+</html>                
