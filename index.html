@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANUS PREMİUM | Global Intelligence Dashboard</title>
+    <title>MANUS PREMIUM v3.0 | Global Intelligence</title>
     <style>
         :root { --p: #3b82f6; --bg: #020617; --c: #111827; --a: #10b981; }
         body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: #f3f4f6; display: flex; }
@@ -19,41 +19,40 @@
         .val { font-size: 24px; font-weight: 800; color: var(--a); }
         .q-box { background: var(--c); padding: 40px; border-radius: 20px; border: 1px solid #1f2937; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         input { width: 100%; background: #000; border: 1px solid #374151; padding: 15px; color: white; border-radius: 10px; font-size: 16px; margin: 20px 0; outline: none; }
-        .btn { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; padding: 18px; width: 100%; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 16px; }
-        .btn:hover { transform: scale(1.01); }
+        .btn { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; padding: 18px; width: 100%; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .btn:hover { transform: scale(1.02); filter: brightness(1.2); }
     </style>
 </head>
 <body>
 <div class="sidebar">
     <div class="logo">MANUS <span style="color:white">PREMIUM</span></div>
-    <div class="nav">İstihbarat</div>
+    <div class="nav">İstihbarat Modülleri</div>
     <div class="item active">👤 Mernis / TC Sorgu</div>
     <div class="item">📱 GSM / No Sorgu</div>
     <div class="item">🏠 Adres / İkametgah</div>
-    <div class="nav">Araç & Plaka</div>
+    <div class="nav">Sistem Kayıtları</div>
     <div class="item">🚗 Detaylı Araç Sorgu</div>
     <div class="item">🚔 GBT / Adli Kayıt</div>
-    <div class="nav">Yönetim</div>
+    <div class="nav">Yönetici Paneli</div>
     <div class="item">⚙️ Sistem Ayarları</div>
 </div>
 <div class="main">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
         <div style="color:var(--a); font-weight:900;">🟢 SERVER: ONLINE (ISTANBUL-A1)</div>
-        <div style="background:#1f2937; padding:10px 20px; border-radius:30px; font-size:12px;">Yetkili: <b>Doğan Uçar</b> <span style="color:#fbbf24; margin-left:10px;">[ROOT ACCESS]</span></div>
+        <div style="background:#1f2937; padding:10px 20px; border-radius:30px; font-size:12px;">Admin Yetkili: <b>Doğan Uçar</b> <span style="color:#fbbf24; margin-left:10px;">[ROOT ACCESS]</span></div>
     </div>
     <div class="stats">
-        <div class="stat-card"><div>Data</div><div class="val">85.2M</div></div>
-        <div class="stat-card"><div>Speed</div><div class="val">0.2ms</div></div>
-        <div class="stat-card"><div>Queries</div><div class="val" style="color:var(--p);">∞</div></div>
-        <div class="stat-card"><div>License</div><div class="val" style="color:#fbbf24;">LIFETIME</div></div>
+        <div class="stat-card"><div>Data Stream</div><div class="val">85.2M+</div></div>
+        <div class="stat-card"><div>Ping</div><div class="val">0.2ms</div></div>
+        <div class="stat-card"><div>Limit</div><div class="val" style="color:var(--p);">∞</div></div>
+        <div class="stat-card"><div>Lisans</div><div class="val" style="color:#fbbf24;">LIFETIME</div></div>
     </div>
-    <div class="q-box">
+    <div class="query-box">
         <h2 style="margin-top:0;">👤 Merkezi Kimlik Sorgulama Ünitesi</h2>
-        <p style="color:#9ca3af; font-size:14px;">Lütfen sorgulanacak 11 haneli TC Kimlik numarasını giriniz.</p>
-        <input type="text" placeholder="T.C. Kimlik No..." id="tc">
-        <button class="btn" onclick="alert('BAŞARILI!\n\nVeritabanı bağlantısı kuruldu.\nKayıtlar dökülüyor...')">SORGULAMAYI BAŞLAT</button>
+        <p style="color:#9ca3af; font-size:14px;">Müşteri Paneli: Sorgu yapmak için geçerli bir kimlik no girin.</p>
+        <input type="text" placeholder="11 Haneli T.C. Kimlik No..." id="tc">
+        <button class="btn" onclick="alert('BAĞLANTI BAŞARILI!\n\nVeritabanı dökümü başlatılıyor...')">VERİLERİ ÇEK</button>
     </div>
 </div>
 </body>
-
 </html>
